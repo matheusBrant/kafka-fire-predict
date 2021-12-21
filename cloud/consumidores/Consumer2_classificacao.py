@@ -2,6 +2,8 @@ from confluent_kafka import Consumer, KafkaException
 from modelClassificacaoSvm import predictSVM
 from modelClassificacaoRF import predictRF
 from modelClassificacaoDT import predictDT
+from modelClassificacaoNB import predictNB
+
 import certifi
 import sys, csv, os
 
@@ -24,7 +26,7 @@ if __name__ == '__main__':
 consumer = Consumer(conf)
 consumer.subscribe([topic])
 
-modelo = input("\nQual será o método de predição: \n a -> SVM\n b -> RandomForest\n c -> DecisionTree\n--> ")
+modelo = input("\nQual será o método de predição? \n a -> SVM\n b -> RandomForest\n c -> DecisionTree\n d -> NayveBayes\n --> ")
 
 
 fileName = r"'../dados/dadosClassificacao/forest_fire_classificacao_predict.csv'"
@@ -68,6 +70,8 @@ try:
                     predictRF(strin)
                 elif modelo == 'c':
                     predictDT(strin)
+                elif modelo == 'd':
+                    predictNB(strin)
                 
 
                 bt=1000000

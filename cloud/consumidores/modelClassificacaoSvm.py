@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import recall_score
 from sklearn.metrics import precision_score
+from sklearn.metrics import balanced_accuracy_score
 from csv import reader
 from sklearn import metrics
 import pandas as pd
@@ -20,14 +21,14 @@ target = dataset_forestfire.pop('fire')
 
 X_train, X_test, y_train, y_test = train_test_split(dataset_forestfire, target, test_size=0.28,random_state=109) # 70% training and 30% test
 
-svc = svm.SVC(kernel ='rbf', gamma = 10)
+svc = svm.SVC(kernel ='rbf', gamma = 0.001, C=150)
 svc.fit(X_train, y_train)
 y_pred  = svc.predict(X_test)
 #print(confusion_matrix(y_test, y_pred))
 print("Acurácia SVM:",round(metrics.accuracy_score(y_test, y_pred)*100, 2),"%")
-print("Precision SVM: ", round(recall_score(y_test, y_pred)*100, 2),"%")
+print("Precisão SVM: ", round(recall_score(y_test, y_pred)*100, 2),"%")
 
-svc.fit(dataset_forestfire, target)
+#svc.fit(dataset_forestfire, target)
 print(svc.predict([[6,5,92.5,121.1,674.4,8.6,25.1,27,4.0,0.0]]))
                 
 def predictSVM(row):
@@ -41,18 +42,4 @@ def predictSVM(row):
     elif predict == 3: 
         print(row, ' ---> Chance de fogo alta: até 2 hectares 🌳🔥🔥🔥')
     elif predict == 4: 
-        print(row, ' ---> Chance de fogo alta: até 20 hectares 🌳🔥🔥🔥🔥')
-    elif predict == 5:
-        print(row, ' ---> Chance de fogo alta: até 50 hectares 🌳🔥🔥🔥🔥🔥')
-    elif predict == 6: 
-        print(row, ' ---> Chance de fogo alta: até 100 hectares 🌳🔥🔥🔥🔥🔥🔥')
-    elif predict == 7: 
-        print(row, ' ---> Chance de fogo alta: até 200 hectares 🌳🔥🔥🔥🔥🔥🔥🔥')
-    elif predict == 8: 
-        print(row, ' ---> Chance de fogo alta: até 400 hectares 🌳🔥🔥🔥🔥🔥🔥🔥🔥')
-    elif predict == 9: 
-        print(row, ' ---> Chance de fogo alta: até 600 hectares 🌳🔥🔥🔥🔥🔥🔥🔥🔥🔥')
-    elif predict == 10: 
-        print(row, ' ---> Chance de fogo alta: até 800 hectares 🌳🔥🔥🔥🔥🔥🔥🔥🔥🔥')
-    elif predict == 11: 
-        print(row, ' ---> Chance de fogo alta: 800+ hectares 🌳🔥🔥🔥🔥🔥🔥🔥🔥🔥')'''
+        print(row, ' ---> Chance de fogo alta: até 20 hectares 🌳🔥🔥🔥🔥')'''
