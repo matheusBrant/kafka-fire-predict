@@ -28,10 +28,10 @@ def acked(err, msg):
         delivered_records += 1  
         print("Produtor gravou no tópico '{}', na partição [{}] e @ offset {}".format(msg.topic(), msg.partition(), msg.offset()))  
 
-fator=3
+fator=1
 
 for n in range(fator):
-    with open('../dados/dadosClassificacao/out.csv', 'r') as read_obj:
+    with open('../dados/dadosClassificacao/sensor_predict.csv', 'r') as read_obj:
         csv_reader = reader(read_obj)
         header = next(csv_reader)
         if header != None:
@@ -40,7 +40,7 @@ for n in range(fator):
                 record_key = "producer3 -> key: " + str(i)
                 i=i+1  
                 record_value = str(row)
-                time.sleep(2)
+                time.sleep(1)
                 print("Produtor gravando: {}\t{}".format(record_key, record_value))  
                 producer.produce(topic, key=record_key, value=record_value, on_delivery=acked)  
                 producer.poll(0) 

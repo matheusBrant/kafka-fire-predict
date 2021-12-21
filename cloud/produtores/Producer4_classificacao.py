@@ -28,10 +28,10 @@ def acked(err, msg):
         delivered_records += 1  
         print("Produtor gravou no tópico '{}', na partição [{}] e @ offset {}".format(msg.topic(), msg.partition(), msg.offset()))  
 
-fator=2
+fator=1
 
 for n in range(fator):
-    with open('../dados/dadosClassificacao/out.csv', 'r') as read_obj:
+    with open('../dados/dadosClassificacao/sensor_predict.csv', 'r') as read_obj:
         csv_reader = reader(read_obj)
         header = next(csv_reader)
         if header != None:

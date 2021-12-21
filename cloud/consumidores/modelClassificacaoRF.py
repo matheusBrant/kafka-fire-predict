@@ -13,13 +13,13 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
-dataset_forestfire = pd.read_csv('../dados/dadosClassificacao/out2.csv')  
+dataset_forestfire = pd.read_csv('../dados/dadosClassificacao/forest_fire_classificacao0-1.csv')  
 dataset_forestfire= dataset_forestfire.drop(['area'],axis=1) #para dropar a area
 target = dataset_forestfire.pop('fire')
 
-X_train, X_test, y_train, y_test = train_test_split(dataset_forestfire, target, test_size=0.3) # 70% training and 30% test
+X_train, X_test, y_train, y_test = train_test_split(dataset_forestfire, target, test_size=0.2) # 70% training and 30% test
 
-rf=RandomForestClassifier(n_estimators=100)
+rf=RandomForestClassifier(n_estimators=25)
 rf.fit(X_train,y_train)
 y_pred=rf.predict(X_test)
 #print(confusion_matrix(y_test, y_pred))
@@ -33,8 +33,8 @@ def predictRF(row):
     if predict == 0:
         print(row, ' ---> Chance de fogo baixa 🌳✅')
     elif predict == 1: 
-        print(row, ' ---> Chance de fogo alta: até 0.5 hectares 🌳🔥')
-    elif predict == 2: 
+        print(row, ' ---> Chance de fogo alta 🌳🔥')
+    '''elif predict == 2: 
         print(row, ' ---> Chance de fogo alta: até 1 hectares 🌳🔥🔥')
     elif predict == 3: 
         print(row, ' ---> Chance de fogo alta: até 2 hectares 🌳🔥🔥🔥')
@@ -53,4 +53,4 @@ def predictRF(row):
     elif predict == 10: 
         print(row, ' ---> Chance de fogo alta: até 800 hectares 🌳🔥🔥🔥🔥🔥🔥🔥🔥🔥')
     elif predict == 11: 
-        print(row, ' ---> Chance de fogo alta: 800+ hectares 🌳🔥🔥🔥🔥🔥🔥🔥🔥🔥')
+        print(row, ' ---> Chance de fogo alta: 800+ hectares 🌳🔥🔥🔥🔥🔥🔥🔥🔥🔥')'''
